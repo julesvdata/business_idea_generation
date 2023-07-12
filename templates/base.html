@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Business Idea Generator</title>
+    <!-- load required frameworks -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% block page_js %}{% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body id="body">
+
+    <div id="mobile-message-container" style="z-index:9999">
+      <div id="mobile-message" class="card-panel" style="background-image: linear-gradient(to right, #F1D050, #D25DA5); z-index:3">
+        <div class="white-text" style="font-size: 40px;" >
+          <img src="/" style="height:110px; width:180px;"></img>
+        </div>
+        <div class="white-text" style="margin-left:40px; font-size: 40px; white-space: pre-wrap;">Business Idea Generator is only available on desktop browsers&#10;&#10;Please visit us again there</div>
+        
+      </div>
+    </div>
+
+    <div id="details_modal" class="modal modal-fixed-header" style="width:98%;height:95%;top:2%;background-color: #F2F4F6;">
+      <div class="modal-header" style="padding: 4px 20px 6px; background-color: white;">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat right"><i class="material-icons">close</i></a>
+        <h4 id="details_modal_heading" style="margin-left: 10px; margin-bottom: 0px;"></h4>
+        <div class="row" style="margin-bottom:5px;">
+          <div class="col s3">
+            <h5 id="details_modal_score"></h5>
+          </div>
+          <div class="col s3">
+            <h5 id="details_modal_mentions"></h5>
+          </div>
+          <div class="col s3">
+            <h5 id="details_modal_shares"></h5>
+          </div>
+          <div class="col s3">
+            <h5 id="details_modal_sentiment"></h5>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom:5px;">
+          <div class="col s6" style="height:calc(25vh);">
+            <div class="card-panel col s12" style="height: calc(25vh - 6px); overflow: hidden; width: 100%;">
+              <div class="card-title left-align" style="position: sticky; border-bottom: 1px solid #ccc;"><h5>AI Summary</h5></div>
+              <div id="ai_summary_div" style="height: calc(100% - 60px); overflow-y: scroll;">
+              </div>
+            </div>
+          </div>
+          <div class="col s6" style="height:calc(25vh);">
+            <div class="card-panel col s12" style="height: calc(25vh - 6px); overflow: hidden; width: 100%;">
+              <div class="card-title left-align" style="position: sticky; border-bottom: 1px solid #ccc; margin-bottom: 10px"><h5>Meta-Trends</h5></div>
+              <div id="network_meta_trends" style="height: calc(100% - 60px); overflow-y: scroll;">
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <ul class="tabs col s12">
+            <li class="tab col s6"><a href="#test1">Summary</a></li>
+            <li class="tab col s6"><a href="#test2">Full Data</a></li>
+          </ul>
+          <div id="tab1" class="col s12">
+          </div>
+          <div id="tab2" class="col s12">
+          </div>
+        </div>
+      </div>
+      <div id="details-content" class="modal-content row" style="padding:5px;">
+        <div class="row">
+          <div id="test1" class="col s12">
+            <div class="card-panel col s4" style="height:calc(30vh - 6px); padding: 10px 10px 10px 10px; width:32.5%; margin-left:10px;">
+              <div class="row">
+                <div class="col s12">
+                  <div id="mentions_over_time" style="height:28vh"></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-panel col s4 wrap center-align" style="height:calc(30vh - 6px); padding: 10px 10px 10px 10px; width:32.5%; margin-left:10px;">
+              <div class="row">
+                <div class="col s12">
+                  <div id="shares_over_time" style="height:28vh"></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-panel col s4 wrap center-align" style="height:calc(30vh - 6px); padding: 10px 10px 10px 10px; width:32.5%; margin-left:10px;">
+              <div class="row">
+                <div class="col s12">
+                  <div id="sentiment_over_time" style="height:28vh"></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-panel col s6 wrap center-align" style="height:calc(50vh - 6px); width:49%; margin-left:10px;">
+              <div class="row">
+                <div class="col s12">
+                  <div id="container" style="height:48vh"></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-panel col s6 wrap center-align" style="height:calc(50vh - 6px); width:49%; margin-left:10px;">
+              <div class="row">
+                <div class="col s12">
+                  <div id="link_container" style="height:48vh"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="test2" class="col s12">
+            <div class="wrap">
+              <table class="head">
+                <tr id = "details_modal_table_header">
+                </tr>
+              </table>
+              <div class="inner_table">
+                <table id="details_modal_rows">
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main id="main-content" style="padding-left: 0px;">
+    {% block content %}{% endblock %}
+    </main>
+
+  </body>
+  
+</html>
+<script>
+
+  const TIMEOUT = 60000; // Timeout in milliseconds (5 seconds in this case)
+
+  $(document).ready(function(){
+
+    displayMobileMessage();
+
+    window.addEventListener('resize', displayMobileMessage);
+
+  })
+  function isMobileDevice() {
+    return window.matchMedia("only screen and (max-width: 1300px)").matches;
+  }
+
+  function displayMobileMessage() {
+    var mobileMessageContainer = document.getElementById('mobile-message-container');
+    var mainContent = document.getElementById('main-content');
+    
+    if (isMobileDevice()) {
+      mobileMessageContainer.style.display = 'flex';
+      mainContent.style.display = 'none';
+    } else {
+      mobileMessageContainer.style.display = 'none';
+      mainContent.style.display = 'block';
+    }
+  }
+
+  function fetchWithTimeout(url, data, timeout, options = {}) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+    options.signal = controller.signal;
+
+    if (data) {
+      options.method = 'POST';
+      options.headers = {
+        ...options.headers,
+        'Content-Type': 'application/json; charset=utf-8',
+      };
+      options.body = JSON.stringify(data);
+    }
+
+    return fetch(url, options)
+      .finally(() => clearTimeout(timeoutId));
+  }
+
+  async function fetchData(url, data, timeout=TIMEOUT,retries = 10) {
+    try {
+      const response = await fetchWithTimeout(url, data, timeout);
+      const responseData = await response.json();
+      return responseData;
+    } catch (error) {
+      if (retries > 0) {
+        console.log(`Retrying, ${retries} retries left...`);
+        return fetchData(url, data, timeout, retries - 1);
+      } else {
+        throw error;
+      }
+    }
+  }   
+
+</script>

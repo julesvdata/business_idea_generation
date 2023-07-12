@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+<!--Load JS-->
+{% block page_js %}
+<script type="text/javascript" src="{{url_for('static', filename='js/business_ideas.js')}}"></script>
+{% endblock %}
+</script>
+
+{% block content %}
+
+<!--Button For Initiating Chat Modal-->
+<div id="chat-button" class="fixed-action-btn" style="display:none;">
+  <a class="btn-floating btn-large" style="background-color: #DD8B79;" onClick="openChat()">
+    <i class="large material-icons">chat</i>
+  </a>
+</div>
+
+<!--Chat Modal-->
+<div id="chat-modal" class="modal">
+  <div class="modal-content">
+    <div class="chat-messages" id="messages-div">
+    </div>
+    <div class="input-field">
+      <div class = "row">
+        <div class = "col s11">
+          <input id="chat-input" type="text" placeholder="Type your message...">
+        </div>
+        <div id="chat_loader_div" class = "col s1" style="display:none;">
+          <div class="preloader-wrapper small active" style="margin-top: 10px;">
+          <div class="spinner-layer spinner-green-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    <a href="#!" class="waves-effect waves-green btn-flat" id="send-message">Send</a>
+  </div>
+</div>
+
+<!--Loading Modal-->
+<div id="load_modal" class="modal" style = "height:300px; width:300px; z-index: 800; display: none">
+  <div class="modal-content">
+      <h6 id="load_title" class="center-align"></h6>
+      <h6 id="load_subtitle" class="center-align"></h6>
+      <div class="preloader-wrapper big active loader">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+
+<!--Main Ideas Container-->
+<div class="container" style="background-color: #F2F4F6; max-width:100%; width:100%; height:100vh; margin: 0 0 0 0;">
+  <div class="row" style="margin-bottom:0px;position: relative;" id="page_parent_div">
+    <div class="col s12" style="height:calc(13vh); padding:0px 10px 0px 10px; position: fixed; width: 100%; z-index:10;" id="ideas_card_div">
+      <div class="card-panel col s12" style="height:calc(12vh - 12px); " id="ideas_div">
+            <div class = "row valign-wrapper">
+            <div class="input-field col s2" style="margin-top:20px">
+              <input placeholder="e.g. automotive" id="industry_value" type="text" class="validate"  value="Coffee">
+              <label for="industry_value">Industry</label>
+            </div>
+            <div class="input-field dark col s2" style="margin-bottom:0px; margin-top:5px">
+              <select multiple class="select_all" id="gender_select">
+                <option value="female" >Female</option>
+                <option value="male" >Male</option>
+              </select>
+              <label>Target Gender</label>
+            </div>
+            <div class="input-field dark col s2" style="margin-bottom:0px; margin-top:5px">
+              <select multiple class="select_all" id="age_select">
+                <option value="0-14" >0-14</option>
+                <option value="15-24" >15-24</option>
+                <option value="25-54" >25-54</option>
+                <option value="55-64" >55-64</option>
+                <option value="65+" >65+</option>
+              </select>
+              <label>Target Age</label>
+            </div>
+            <div class="input-field dark col s2" style="margin-bottom:0px; margin-top:5px">
+              <select class="select_all" id="idea_select">
+                <option value="new product" selected>New Product</option>
+                <option value="marketing campaign">Marketing Campaign</option>
+                <option value="business strategy">Business Strategy</option>
+                <option value="business model">Business Model</option>
+              </select>
+              <label>Idea Type</label>
+            </div>
+            <div class="input-field col s2" style="margin-top:20px">
+              <input placeholder="e.g. space exploration" id="trend_select" type="text" class="validate" value="Space Exploration">
+              <label for="trend_select">Subject</label>
+            </div>
+            <div class="col s1">
+              <a class="btn waves-effect waves-light" onclick="generate_ideas(true)">Submit
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12" style="height:calc(85vh); padding:0px 10px 0px 10px; margin-top: calc(13vh + 5px); z-index: -1;" id="further_ideas_card_div"></div>
+  </div>
+</div>
+
+
+
+{% endblock %}

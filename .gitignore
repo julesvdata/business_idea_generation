@@ -1,0 +1,5 @@
+venv/
+*.yaml
+.DS_Store
+*.ipynb
+*.pyc
