@@ -432,7 +432,17 @@ def get_platforms(
 
 
 def get_retailers(openai_key, max_tries, title, description):
-    """Get potential retailers for a product."""
+    """Get potential retailers for a product.
+
+    Args:
+        openai_key (str): openai key
+        max_tries (int): max number of tries
+        title (str): title
+        description (str): description
+
+    Returns:
+        summary_text (list): potential retailers
+    """
 
     openai.api_key = openai_key
 
@@ -582,11 +592,25 @@ def get_customer_value(
 def get_resources_capabilities(
     openai_key, max_tries, title, description, age, gender, industry, trend
 ):
+    """Get resources and capabilities for a strategy.
+
+    Args:
+        openai_key (str): openai key
+        max_tries (int): max number of tries
+        title (str): title
+        description (str): description
+        age (str): age
+        gender (str): gender
+        industry (str): industry
+        trend (str): trend
+
+    Returns:
+        summary_text: resources and capabilities summary text
+    """
+
     openai.api_key = openai_key
 
     prompt = f"Strategy title: {title}\nStrategy description {description}\nIndustry:{industry}\nStrategy Theme:{trend}\nWhat resources or capabilities would we need to execute this strategy? Please answer in bullet point form where bullets are of form ' -'"
-
-    # What resources/capabilities will we need to execute this strategy
 
     messages = [
         {"role": "system", "content": "You are a business strategy expert."},
