@@ -2,6 +2,8 @@
 
 A Flask Web App utilising OpenAI's GPT-4 to generate Product Ideas, Business Stategies or Marketing Campaigns
 
+Accessible on Replit here: [businessideageneration.julesvdata.repl.co]](businessideageneration.julesvdata.repl.cog)
+
 ## Key Features
 - GPT-4 Business Idea and Strategy generation
 - Idea Generation for user spcified demograpics and theme
